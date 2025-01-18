@@ -2,26 +2,22 @@ import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { Home, CreditCard, Users, Mail, MousePointer, ArrowUpRight, Settings, Link, MoreHorizontal, Sun, Moon, ImagePlus, Twitter, Linkedin, Youtube, PieChart } from 'lucide-react';
 import Footer from './Footer.tsx';
 import AdminOption from './AdminOption.tsx';
+import PaymentMethod from './PaymentMethod.tsx';
+import Header from './Header.tsx';
 
 const members = [
-  { id: 1, name: 'Sattie', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
-  { id: 2, name: 'Freebies', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150' },
-  { id: 3, name: 'Parkland Trustlock', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150' },
-  { id: 4, name: 'BestWork', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150' },
+  { id: 1, name: 'chairman', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
+  { id: 2, name: 'vice-chairman', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150' },
+  { id: 3, name: 'Treasurer', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150' },
+  { id: 4, name: 'Security', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150' },
 ];
 
 const recentPayments = [
-  { id: 1, member: 'Sattie', amount: '₹5,000', date: '2024-03-10', status: 'Completed' },
-  { id: 2, member: 'Freebies', amount: '₹3,500', date: '2024-03-09', status: 'Pending' },
-  { id: 3, member: 'Parkland Trustlock', amount: '₹7,200', date: '2024-03-08', status: 'Completed' },
+  { id: 1, member: 'mishra g', amount: '₹5,000', date: '2024-03-10', status: 'Completed' },
+  { id: 2, member: 'pal', amount: '₹3,500', date: '2024-03-09', status: 'Verification Pending' },
+  { id: 3, member: 'tiwari', amount: '₹7,200', date: '2024-03-08', status: 'Completed' },
 ];
 
-const paymentFacilities = [
-  'UPI Payment',
-  'Cash',
-  'Credit Card',
-  'Cheque',
-];
 const paymentInsights = {
   bankBalance: 250000,
   breakdown: {
@@ -41,12 +37,9 @@ const paymentInsights = {
 
 function home() {
   const [activeSection, setActiveSection] = useState('home');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'online' | 'Cash'>('online');
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [svgWidth, setSvgWidth] = useState(700);
-
+  let isDarkMode = false;   // This is a dummy value, you can change it to true to see the dark mode
   useLayoutEffect(() => {
     const updateSvgWidth = () => {
       if (svgRef.current) {
@@ -75,96 +68,8 @@ function home() {
         return (
           <div className="space-y-6">
             <h2 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Payment Methods</h2>
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <button
-                onClick={() => setSelectedPaymentMethod('online')}
-                className={`p-4 rounded-lg transition-all ${selectedPaymentMethod === 'online'
-                  ? `${isDarkMode ? 'bg-blue-600' : 'bg-blue-500'} text-white shadow-lg shadow-blue-500/50`
-                  : `${isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-50 hover:bg-blue-100'} ${isDarkMode ? 'text-white' : 'text-gray-800'}`
-                  }`}
-              >
-                <h3 className="font-semibold mb-2">Online Payment</h3>
-              </button>
-              <button
-                onClick={() => setSelectedPaymentMethod('Cash')}
-                className={`p-4 rounded-lg transition-all ${selectedPaymentMethod === 'Cash'
-                  ? `${isDarkMode ? 'bg-blue-600' : 'bg-blue-500'} text-white shadow-lg shadow-blue-500/50`
-                  : `${isDarkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-50 hover:bg-blue-100'} ${isDarkMode ? 'text-white' : 'text-gray-800'}`
-                  }`}
-              >
-                <h3 className="font-semibold mb-2">UPI</h3>
-              </button>
-            </div>
-            {/*  */}
-            <div className={`w-72 border-l ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} pl-6`}>
-              <h3 className={`font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Payment Details</h3>
-              <select className={`w-full p-2 border rounded-lg mb-4 ${isDarkMode
-                  ? 'bg-gray-800 border-gray-700 text-white'
-                  : 'bg-white border-gray-300 text-gray-800'
-                }`}>
-                <option>Select payment facility</option>
-                {paymentFacilities.map((facility, index) => (
-                  <option key={index}>{facility}</option>
-                ))}
-              </select>
-
-              <h3 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Entry</h3>
-              <input
-                type="text"
-                placeholder="Lock cheating"
-                className={`w-full p-2 border rounded-lg mb-4 ${isDarkMode
-                    ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500'
-                    : 'bg-white border-gray-300 text-gray-800'
-                  }`}
-              />
-
-              {/* Image Upload Section */}
-              <div className="mb-4">
-                <h3 className={`font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Payment Proof</h3>
-                <div className={`border-2 border-dashed rounded-lg p-4 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'
-                  } text-center cursor-pointer relative`}>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  />
-                  {selectedImage ? (
-                    <div className="relative">
-                      <img
-                        src={selectedImage}
-                        alt="Payment proof"
-                        className="max-h-32 mx-auto rounded-lg"
-                      />
-                      <button
-                        onClick={() => setSelectedImage(null)}
-                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                      >
-                        ×
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col items-center">
-                      <ImagePlus className={`w-8 h-8 mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-                      <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                        Upload payment proof
-                      </p>
-                      <p className={`text-xs mt-1 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-                        Click or drag image here
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex justify-between mt-8">
-                <button className="px-6 py-2 bg-blue-500 text-white rounded-lg">Verify</button>
-                <button className={`px-6 py-2 border rounded-lg ${isDarkMode
-                    ? 'border-gray-700 text-gray-300'
-                    : 'border-gray-300 text-gray-800'
-                  }`}>Cancel</button>
-              </div>
-            </div>
+            
+            <PaymentMethod/>
 
           </div>
         );
@@ -305,41 +210,14 @@ function home() {
     }
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  
 
   return (
     <div className={`min-h-screen bg-gradient-to-b ${isDarkMode ? 'from-gray-900 to-gray-800' : 'from-blue-900 to-blue-700'} p-8`}>
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Main Dashboard Card */}
         <div className={`rounded-2xl shadow-xl p-6 ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
-          <div className="flex justify-between items-center mb-6">
-            <div className="flex items-center gap-2">
-
-              <img src="./icon/logo.png" alt="Company Logo" className="w-40 h-25 mt-5" />
-              {/* <Lock className={isDarkMode ? 'text-blue-400' : 'text-blue-600'} /> */}
-              {/* <span className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Society Members</span> */}
-            </div>
-            <div className="flex gap-2">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">Add</button>
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className={`px-4 py-2 rounded-lg flex items-center gap-2 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-blue-100 text-blue-600'
-                  }`}
-              >
-                {isDarkMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-                {isDarkMode ? 'Dark Mode' : 'Light Mode'}
-              </button>
-            </div>
-          </div>
+          <Header/>
 
           {/* Sidebar and Main Content */}
           <div className="flex flex-wrap gap-6 lg:flex-nowrap">
