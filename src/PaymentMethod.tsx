@@ -24,6 +24,7 @@ const PaymentMethod = () => {
     let isDarkMode = false; // this is dummy value, you can change it
     return (
         <>
+        
             <div className="grid grid-cols-2 gap-4 mb-8">
                 <button
                     onClick={() => setSelectedPaymentMethod('online')}
