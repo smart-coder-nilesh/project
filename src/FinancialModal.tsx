@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { X, Send, Mail, Bell, Plus, AlertCircle } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { RootState } from './Store/store';
 
 // interface FinancialModalProps {
 //   isOpen: boolean;
@@ -46,7 +48,8 @@ const FinancialModal = () => {
     { label: '', value: 4, color: 'bg-blue-400' },
     { label: '', value: 10, color: 'bg-purple-600' },
   ];
-  var isDarkMode = false;
+  const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
+   
   const handleExpenseSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle the expense submission here

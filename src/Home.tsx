@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import PaymentMethod from './PaymentMethod.tsx';
 import Header from './Header.tsx';
 import Insight from './Insight.tsx';
+import { useSelector } from 'react-redux';
+import { RootState } from './Store/store.ts';
 
 const members = [
   { id: 1, name: 'chairman', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
@@ -23,36 +25,39 @@ const recentPayments = [
 
 function home() {
   const [activeSection, setActiveSection] = useState('home');
-  let isDarkMode = false;   // This is a dummy value, you can change it to true to see the dark mode
+  const [option, setSelectedoption] = useState('');
+  const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
+    // This is a dummy value, you can change it to true to see the dark mode
   
 
   const renderContent = () => {
     const options = [
-      { path: '/verify-payment', label: 'Verify Payment', icon: <CheckSquare /> },
-      { path: '/parking-management', label: 'Parking Management', icon: <Car /> },
-      { path: '/visitor-access', label: 'Visitor Access', icon: <Users /> },
-      { path: '/notification', label: 'Notification', icon: <Bell /> },
-      { path: '/raise-complaint', label: 'Raise Complaint', icon: <AlertCircle /> },
+      { path: 'verify-payment', label: 'Verify Payment', icon: <CheckSquare /> },
+      { path: 'parking-management', label: 'Parking Management', icon: <Car /> },
+      { path: 'visitor-access', label: 'Visitor Access', icon: <Users /> },
+      { path: 'notification', label: 'Notification', icon: <Bell /> },
+      { path: 'raise-complaint', label: 'Raise Complaint', icon: <AlertCircle /> },
     ];
     switch (activeSection) {
       case 'home':
         return (
           <div className="space-y-6">
-            <h2 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Payment Methods</h2>
-            <div className="flex flex-wrap justify-center gap-6 mt-10">
+            <h2 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Select Appropriate Options</h2>
+            {(option === '') && (<div className="flex flex-wrap justify-center gap-6 mt-10">
               {options.map((option) => (
-                <Link
-                  key={option.path}
-                  to={option.path}
+                <div
+                  onClick={() => setSelectedoption(option.path)}
                   className="w-64 h-32 bg-white text-gray-800 flex flex-col items-center justify-center text-lg font-semibold rounded-lg border shadow-lg shadow-gray-300 hover:shadow-xl transition-all"
                 >
                   <div className="mb-2 text-blue-500">{option.icon}</div>
                   {option.label}
-                </Link>
+                </div>
               ))}
-            </div>
-
-            {/* <PaymentMethod/> */}
+            </div> )
+            }
+            {option === 'verify-payment' && (<PaymentMethod/>)};
+            
+            
 
           </div>
         );

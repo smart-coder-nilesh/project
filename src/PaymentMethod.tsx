@@ -1,5 +1,7 @@
 import { ImagePlus } from "lucide-react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "./Store/store";
 
 const PaymentMethod = () => {
 
@@ -21,7 +23,8 @@ const PaymentMethod = () => {
     ];
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'online' | 'Cash'>('online');
-    let isDarkMode = false; // this is dummy value, you can change it
+    const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
+   // this is dummy value, you can change it
     return (
         <>
         

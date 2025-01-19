@@ -1,4 +1,6 @@
 import { useRef, useState, useLayoutEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "./Store/store";
 
 const insights = () => {
 
@@ -18,7 +20,8 @@ const insights = () => {
             { month: 'Jun', fine: 5000, actual: 25000 }
         ]
     };
-    let isDarkMode = false;
+    const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
+   
     const svgRef = useRef<SVGSVGElement | null>(null);
     const [svgWidth, setSvgWidth] = useState(700);
     useLayoutEffect(() => {

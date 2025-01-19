@@ -1,9 +1,13 @@
 import { Moon, Sun } from "lucide-react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleDarkMode } from "./Action/Action";
+import { RootState } from "./Store/store";
 
 const Header =() => {
     
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
+    const dispatch = useDispatch();
     return (
         <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-2">
@@ -13,9 +17,9 @@ const Header =() => {
               {/* <span className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Society Members</span> */}
             </div>
             <div className="flex gap-2">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">Add</button>
+              <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">Admin</button>
               <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
+                onClick={() => dispatch(toggleDarkMode())}
                 className={`px-4 py-2 rounded-lg flex items-center gap-2 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-blue-100 text-blue-600'
                   }`}
               >
