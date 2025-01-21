@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Home, CreditCard, Users,  Settings, MoreHorizontal,  
   PieChart ,CheckSquare,Car,Bell,AlertCircle} from 'lucide-react';
 import Footer from './Footer.tsx';
 import AdminOption from './AdminOption.tsx';
-import { Link } from 'react-router-dom';
 import PaymentMethod from './PaymentMethod.tsx';
 import Header from './Header.tsx';
 import Insight from './Insight.tsx';
 import { useSelector } from 'react-redux';
 import { RootState } from './Store/store.ts';
+import Parking from './parking/parking.js';
 
 const members = [
   { id: 1, name: 'chairman', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
@@ -29,7 +29,6 @@ function home() {
   const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
     // This is a dummy value, you can change it to true to see the dark mode
   
-
   const renderContent = () => {
     const options = [
       { path: 'verify-payment', label: 'Verify Payment', icon: <CheckSquare /> },
@@ -42,7 +41,7 @@ function home() {
       case 'home':
         return (
           <div className="space-y-6">
-            <h2 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Select Appropriate Options</h2>
+            {(option === '') && (<h2 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Select Appropriate Options</h2>)}
             {(option === '') && (<div className="flex flex-wrap justify-center gap-6 mt-10">
               {options.map((option) => (
                 <div
@@ -55,10 +54,8 @@ function home() {
               ))}
             </div> )
             }
-            {option === 'verify-payment' && (<PaymentMethod/>)};
-            
-            
-
+            {option === 'verify-payment' && (<PaymentMethod/>)}
+            {option === 'parking-management' && <Parking />}
           </div>
         );
       case 'payments':
@@ -93,8 +90,6 @@ function home() {
     }
   };
 
-
-
   return (
     <div className={`min-h-screen bg-gradient-to-b ${isDarkMode ? 'from-gray-900 to-gray-800' : 'from-blue-900 to-blue-700'} p-8`}>
       <div className="max-w-6xl mx-auto space-y-12">
@@ -107,7 +102,16 @@ function home() {
             {/* Sidebar */}
             <div className="w-15 flex flex-row sm:flex-col gap-4">
               <button
-                onClick={() => setActiveSection('home')}
+                onClick={() => {
+                  if(option === '' ){
+                    setActiveSection('home')
+                  }else{
+                    setSelectedoption('')
+                    setActiveSection('home')
+                  }
+                  
+                }}
+
                 className={`p-5 rounded-lg ${activeSection === 'home'
                   ? 'bg-blue-500 text-white'
                   : isDarkMode
