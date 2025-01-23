@@ -1,5 +1,4 @@
 import { Moon, Sun } from "lucide-react";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDarkMode } from "./Action/Action";
 import { RootState } from "./Store/store";

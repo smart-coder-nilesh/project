@@ -1,6 +1,5 @@
-import  { useState } from 'react';
-import { Home, CreditCard, Users,  Settings, MoreHorizontal,  
-  PieChart ,CheckSquare,Car,Bell,AlertCircle} from 'lucide-react';
+import { useState } from 'react';
+import { Home, CreditCard, Users, Settings, MoreHorizontal, PieChart, CheckSquare, Car, Bell, AlertCircle } from 'lucide-react';
 import Footer from './Footer.tsx';
 import AdminOption from './AdminOption.tsx';
 import PaymentMethod from './PaymentMethod.tsx';
@@ -14,7 +13,7 @@ const members = [
   { id: 1, name: 'chairman', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
   { id: 2, name: 'vice-chairman', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150' },
   { id: 3, name: 'Treasurer', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150' },
-  { id: 4, name: 'Security', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150' },
+  { id: 4, name: 'Secretary', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150' },
 ];
 
 const recentPayments = [
@@ -27,8 +26,8 @@ function home() {
   const [activeSection, setActiveSection] = useState('home');
   const [option, setSelectedoption] = useState('');
   const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
-    // This is a dummy value, you can change it to true to see the dark mode
-  
+  // This is a dummy value, you can change it to true to see the dark mode
+
   const renderContent = () => {
     const options = [
       { path: 'verify-payment', label: 'Verify Payment', icon: <CheckSquare /> },
@@ -42,19 +41,27 @@ function home() {
         return (
           <div className="space-y-6">
             {(option === '') && (<h2 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Select Appropriate Options</h2>)}
-            {(option === '') && (<div className="flex flex-wrap justify-center gap-6 mt-10">
-              {options.map((option) => (
-                <div
-                  onClick={() => setSelectedoption(option.path)}
-                  className="w-64 h-32 bg-white text-gray-800 flex flex-col items-center justify-center text-lg font-semibold rounded-lg border shadow-lg shadow-gray-300 hover:shadow-xl transition-all"
-                >
-                  <div className="mb-2 text-blue-500">{option.icon}</div>
-                  {option.label}
-                </div>
-              ))}
-            </div> )
-            }
-            {option === 'verify-payment' && (<PaymentMethod/>)}
+
+
+            {(option === '') && (
+              <div className="flex flex-wrap justify-center gap-6 mt-10">
+                {options.map((option) => (
+                  <div
+                    key={option.path}
+                    onClick={() => setSelectedoption(option.path)}
+                    className={`w-64 h-32  ${isDarkMode ? 'text-white bg-blue-500' : 'text-gray-800 bg-white'} flex flex-col items-center justify-center text-lg font-semibold rounded-lg border shadow-lg shadow-gray-300 transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-blue-500 hover:ring-2 hover:ring-blue-400`}
+                  >
+                    <div className={`mb-2 ${isDarkMode ? 'text-white': 'text-blue-500'}`}>{option.icon}</div>
+                    {option.label}
+                  </div>
+                ))}
+              </div>
+            )}
+
+
+
+
+            {option === 'verify-payment' && (<PaymentMethod />)}
             {option === 'parking-management' && <Parking />}
           </div>
         );
@@ -83,7 +90,7 @@ function home() {
         );
       case 'insights':
         return (
-          <Insight/>
+          <Insight />
         );
       default:
         return <div className={isDarkMode ? 'text-white' : 'text-gray-800'}>Section under development</div>;
@@ -103,13 +110,13 @@ function home() {
             <div className="w-15 flex flex-row sm:flex-col gap-4">
               <button
                 onClick={() => {
-                  if(option === '' ){
+                  if (option === '') {
                     setActiveSection('home')
-                  }else{
+                  } else {
                     setSelectedoption('')
                     setActiveSection('home')
                   }
-                  
+
                 }}
 
                 className={`p-5 rounded-lg ${activeSection === 'home'

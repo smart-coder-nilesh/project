@@ -23,7 +23,7 @@ const BookingSpace = () => {
     <div className="space-y-8">
       <div className="bg-white rounded-xl shadow-sm p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">Parkiaser</h2>
+          <h2 className="text-xl font-semibold text-gray-900">Reserve your Spot</h2>
           <div className="flex items-center space-x-4">
             <button className="p-2 rounded-lg hover:bg-gray-100">
               <ChevronLeft className="h-5 w-5 text-gray-500" />
@@ -110,20 +110,20 @@ const BookingSpace = () => {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Parking Rates</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="p-4 rounded-lg bg-gray-50">
-            <span className="text-sm text-gray-600">1 Hour</span>
-            <p className="text-lg font-semibold text-gray-900">$2.00</p>
-          </div>
-          <div className="p-4 rounded-lg bg-gray-50">
-            <span className="text-sm text-gray-600">4 Hours</span>
-            <p className="text-lg font-semibold text-gray-900">$7.00</p>
-          </div>
-          <div className="p-4 rounded-lg bg-gray-50">
-            <span className="text-sm text-gray-600">8 Hours</span>
-            <p className="text-lg font-semibold text-gray-900">$12.00</p>
-          </div>
-          <div className="p-4 rounded-lg bg-gray-50">
             <span className="text-sm text-gray-600">Full Day</span>
-            <p className="text-lg font-semibold text-gray-900">$20.00</p>
+            <p className="text-lg font-semibold text-gray-900">$20</p>
+          </div>
+          <div className="p-4 rounded-lg bg-gray-50">
+            <span className="text-sm text-gray-600">One Month</span>
+            <p className="text-lg font-semibold text-gray-900">$400</p>
+          </div>
+          <div className="p-4 rounded-lg bg-gray-50">
+            <span className="text-sm text-gray-600">Six months</span>
+            <p className="text-lg font-semibold text-gray-900">$2000</p>
+          </div>
+          <div className="p-4 rounded-lg bg-gray-50">
+            <span className="text-sm text-gray-600">One Year</span>
+            <p className="text-lg font-semibold text-gray-900">$3600</p>
           </div>
         </div>
       </div>
