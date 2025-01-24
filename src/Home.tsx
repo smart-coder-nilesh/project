@@ -49,7 +49,16 @@ function home() {
                   <div
                     key={option.path}
                     onClick={() => setSelectedoption(option.path)}
-                    className={`w-64 h-32  ${isDarkMode ? 'text-white bg-blue-500' : 'text-gray-800 bg-white'} flex flex-col items-center justify-center text-lg font-semibold rounded-lg border shadow-lg shadow-gray-300 transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-blue-500 hover:ring-2 hover:ring-blue-400`}
+                    className={`w-64 h-32  ${isDarkMode ? 'text-white bg-blue-500' : 'text-gray-800 bg-white'} flex flex-col 
+                    items-center justify-center 
+                    text-lg font-semibold 
+                    rounded-lg border 
+                    border-blue-200
+                    transform transition-transform duration-300
+                    hover:-translate-y-2 hover:shadow-2xl  ${isDarkMode ? 'hover:shadow-gray-100' :'hover:shadow-gray-600'}
+                    hover:border-blue-500 
+                    hover:ring-2 
+                    hover:ring-blue-400`}
                   >
                     <div className={`mb-2 ${isDarkMode ? 'text-white': 'text-blue-500'}`}>{option.icon}</div>
                     {option.label}
