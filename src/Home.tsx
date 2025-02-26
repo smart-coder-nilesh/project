@@ -8,7 +8,9 @@ import Insight from './Insight.tsx';
 import { useSelector } from 'react-redux';
 import { RootState } from './Store/store.ts';
 import Parking from './parking/parking.js';
-
+import VisitorLogin from './register_visitor/VisitorLogin.tsx';
+import Purpose from './register_visitor/purpose.tsx';
+import Handlevisit from './register_visitor/handlevisit.tsx';
 const members = [
   { id: 1, name: 'chairman', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
   { id: 2, name: 'vice-chairman', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150' },
@@ -21,6 +23,8 @@ const recentPayments = [
   { id: 2, member: 'pal', amount: '₹3,500', date: '2024-03-09', status: 'Verification Pending' },
   { id: 3, member: 'tiwari', amount: '₹7,200', date: '2024-03-08', status: 'Completed' },
 ];
+
+
 
 function home() {
   const [activeSection, setActiveSection] = useState('home');
@@ -66,12 +70,9 @@ function home() {
                 ))}
               </div>
             )}
-
-
-
-
             {option === 'verify-payment' && (<PaymentMethod />)}
             {option === 'parking-management' && <Parking />}
+            {option === 'visitor-access' && <Handlevisit/> }
           </div>
         );
       case 'payments':

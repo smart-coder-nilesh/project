@@ -24,7 +24,6 @@ const PaymentMethod = () => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<'online' | 'Cash'>('online');
     const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
-   // this is dummy value, you can change it
     return (
         <>
         
