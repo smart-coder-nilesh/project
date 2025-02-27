@@ -8,8 +8,6 @@ import Insight from './Insight.tsx';
 import { useSelector } from 'react-redux';
 import { RootState } from './Store/store.ts';
 import Parking from './parking/parking.js';
-import VisitorLogin from './register_visitor/VisitorLogin.tsx';
-import Purpose from './register_visitor/purpose.tsx';
 import Handlevisit from './register_visitor/handlevisit.tsx';
 const members = [
   { id: 1, name: 'chairman', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
@@ -45,7 +43,6 @@ function home() {
         return (
           <div className="space-y-6">
             {(option === '') && (<h2 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>Select Appropriate Options</h2>)}
-
 
             {(option === '') && (
               <div className="flex flex-wrap justify-center gap-6 mt-10">

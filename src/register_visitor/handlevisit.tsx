@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import Login from './VisitorLogin';
-import Purpose from './purpose';
+import Purpose from './Purpose';
 import Details from './Detail';
-import { VisitDetails } from './purpose';
-
+import { VisitDetails } from './Purpose';
 function Handlevisit() {
   const [currentView, setCurrentView] = useState<'login' | 'purpose' | 'details'>('login');
   const [visitDetails, setVisitDetails] = useState<VisitDetails | null>(null);

@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { VisitDetails } from './purpose';
+import { VisitDetails } from './Purpose';
 
 export interface DetailsProps {
     details: VisitDetails;
     onBack: () => void;
-  }
+}
+
 function Details({ details, onBack }: DetailsProps) {
   const { visitorName, phoneNumber, purpose } = details;
 
@@ -31,7 +32,7 @@ function Details({ details, onBack }: DetailsProps) {
           />
         </div>
 
-        <button className="w-full bg-yellow-400 text-black font-bold py-3 px-6 rounded-lg mb-6">
+        <button className="w-full bg-blue-500 text-white font-bold py-3 px-6 rounded-lg mb-6">
           {purpose}
         </button>
 
@@ -64,7 +65,7 @@ function Details({ details, onBack }: DetailsProps) {
           className="w-full bg-blue-100 text-blue-800 font-bold py-3 px-6 rounded-lg flex items-center justify-center"
           onClick={onBack}
         >
-          Campus Map
+          Change Details
           <FontAwesomeIcon icon={faChevronRight} className="ml-2" />
         </button>
       </div>

@@ -1,6 +1,6 @@
 import { useState, useRef, ChangeEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMobile, faKey, faCamera, faUpload, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faMobile, faKey, faCamera, faUpload, faTimes,faUser } from '@fortawesome/free-solid-svg-icons';
 import Webcam from 'react-webcam';
 export interface LoginProps {
   onNext: () => void;
@@ -125,6 +125,36 @@ function VisitorLogin({ onNext }: LoginProps) {
           />
         </div>
 
+        <div className="border border-gray-200 rounded-lg p-4 flex justify-between items-center">
+          
+          <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
+          <input
+            type="name"
+            placeholder="Name"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            className="outline-none mr-2"
+          />
+          <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
+          <input
+            type="name"
+            placeholder="LastName"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            className="outline-none"
+          />
+        </div>
+
+        <button
+          onClick={handleCheckIn}
+          className="w-full bg-blue-500 text-l text-white font-bold py-3 rounded-lg"
+        >
+          Register
+        </button>
+        <div className='flex items-center'>
+             OR
+        </div>
+        
         <div className="border border-gray-200 rounded-lg p-4 flex items-center">
           <FontAwesomeIcon icon={faKey} className="text-gray-400 mr-3" />
           <input
@@ -135,19 +165,14 @@ function VisitorLogin({ onNext }: LoginProps) {
             className="flex-1 outline-none"
           />
         </div>
-
         <button
           onClick={handleCheckIn}
-          className="w-full bg-yellow-400 text-black font-bold py-4 rounded-lg"
+          className="w-full bg-blue-500 text-l text-white font-bold py-3 rounded-lg"
         >
           Check In
         </button>
       </div>
 
-      <div className="mt-auto w-full max-w-md grid grid-cols-2 gap-4">
-        <button className="text-gray-600 py-3">Checkout</button>
-        <button className="text-gray-600 py-3">Print Badge</button>
-      </div>
     </div>
   );
 }

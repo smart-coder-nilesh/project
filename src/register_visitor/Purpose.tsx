@@ -54,7 +54,7 @@ function Purpose({ onBack, onNext }: PurposeProps) {
           >
             <FontAwesomeIcon 
               icon={purpose.icon} 
-              className="text-3xl text-yellow-400 mb-2" 
+              className="text-3xl text-blue-500 mb-2" 
             />
             <span className="text-sm text-center">{purpose.title}</span>
           </button>
