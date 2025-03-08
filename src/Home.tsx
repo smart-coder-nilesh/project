@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Home, CreditCard, Users, Settings, MoreHorizontal, PieChart, CheckSquare, Car, Bell, AlertCircle } from 'lucide-react';
-import Footer from './Footer.tsx';
-import AdminOption from './AdminOption.tsx';
+import Footer from './menu/Footer.tsx';
+import AdminOption from './menu/AdminOption.tsx';
 import PaymentMethod from './PaymentMethod.tsx';
 import Header from './Header.tsx';
 import Insight from './Insight.tsx';
@@ -9,6 +9,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from './Store/store.ts';
 import Parking from './parking/parking.js';
 import Handlevisit from './register_visitor/handlevisit.tsx';
+import axios from 'axios';
+import AuthContext from './authorization/AuthContext.tsx';
+import { Navigate, useNavigate } from 'react-router-dom';
+
+
+
+
 const members = [
   { id: 1, name: 'chairman', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150' },
   { id: 2, name: 'vice-chairman', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150' },
@@ -25,9 +32,25 @@ const recentPayments = [
 
 
 function home() {
+
   const [activeSection, setActiveSection] = useState('home');
   const [option, setSelectedoption] = useState('');
   const isDarkMode = useSelector((state: RootState) => state.toggleDarkmode.isDarkMode);
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!auth?.token) return;
+
+    axios.get("http://localhost:5018/api/Login", {
+            headers: { Authorization: `Bearer ${auth.token}` },
+        })
+        .then((response) => {
+          if(response.data == "" ){
+            navigate("/login");
+          }
+        }).catch((e) => console.log(e))
+
+}, [auth?.token]);
   // This is a dummy value, you can change it to true to see the dark mode
 
   const renderContent = () => {
@@ -50,7 +73,7 @@ function home() {
                   <div
                     key={option.path}
                     onClick={() => setSelectedoption(option.path)}
-                    className={`w-64 h-32  ${isDarkMode ? 'text-white bg-blue-500' : 'text-gray-800 bg-white'} flex flex-col 
+                    className={`w-64 h-32  ${isDarkMode ? 'text-white  customBlue' : 'text-gray-800 bg-white'} flex flex-col 
                     items-center justify-center 
                     text-lg font-semibold 
                     rounded-lg border 

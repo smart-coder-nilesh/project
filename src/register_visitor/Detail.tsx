@@ -8,22 +8,22 @@ export interface DetailsProps {
 }
 
 function Details({ details, onBack }: DetailsProps) {
+  
   const { visitorName, phoneNumber, purpose } = details;
 
   return (
-    <div className="bg-white flex flex-col justify-center p-6 rounded-xl shadow-lg">
+    <div className="customBlue flex flex-col justify-center p-6 rounded-xl shadow-lg">
       <img 
         src="https://ui-avatars.com/api/?name=MyGate&background=fde047&color=000" 
         alt="Logo" 
         className="w-20 h-20 mx-auto mt-0 mb-6 rounded-full"
       />
       
-      <div className="bg-white rounded-xl p-6 justify-center">
+      <div className="customBlue rounded-xl p-6 justify-center">
         <div className="flex justify-between  mb-6">
           <div>
             <h2 className="text-2xl font-bold">{visitorName}</h2>
             <p className="text-gray-600">{phoneNumber}</p>
-            <p className="text-gray-800">Piyush Chemicals</p>
           </div>
           <img 
             src={`https://ui-avatars.com/api/?name=${visitorName}&background=e2e8f0&color=000`}

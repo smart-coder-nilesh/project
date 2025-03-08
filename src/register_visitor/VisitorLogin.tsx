@@ -1,9 +1,10 @@
 import { useState, useRef, ChangeEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMobile, faKey, faCamera, faUpload, faTimes,faUser } from '@fortawesome/free-solid-svg-icons';
+import { faMobile, faKey, faCamera, faUpload, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
 import Webcam from 'react-webcam';
+import { VisitDetails } from './Purpose';
 export interface LoginProps {
-  onNext: () => void;
+  onNext: (details: VisitDetails | null) => void;
 }
 
 function VisitorLogin({ onNext }: LoginProps) {
@@ -11,11 +12,18 @@ function VisitorLogin({ onNext }: LoginProps) {
   const [inviteCode, setInviteCode] = useState<string>('');
   const [showCamera, setShowCamera] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
+  const [visitorName, setVisitorName] = useState<string>('');
+  const [visitorLastName, setvisitorLastName] = useState<string>('');
   const webcamRef = useRef<Webcam>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleCheckIn = () => {
-    onNext();
+    
+    onNext({
+      visitorName: visitorName + ' ' + visitorLastName,
+      phoneNumber: phoneNumber,
+      purpose: "purpose"
+    });
   };
 
   const captureImage = () => {
@@ -38,16 +46,16 @@ function VisitorLogin({ onNext }: LoginProps) {
   };
 
   return (
-    <div className="bg-white flex flex-col items-center p-6">
+    <div className="custom-blue flex flex-col items-center p-6">
       <div className="relative w-24 h-24 mt-0 mb-10">
         {image ? (
           <div className="relative">
-            <img 
+            <img
               src={image}
-              alt="Profile" 
+              alt="Profile"
               className="w-24 h-24 rounded-full object-cover"
             />
-            <button 
+            <button
               onClick={() => setImage(null)}
               className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
             >
@@ -55,9 +63,9 @@ function VisitorLogin({ onNext }: LoginProps) {
             </button>
           </div>
         ) : (
-          <img 
-            src="https://ui-avatars.com/api/?name=MyGate&background=fde047&color=000&size=200" 
-            alt="Logo" 
+          <img
+            src="https://ui-avatars.com/api/?name=MyGate&background=fde047&color=000&size=200"
+            alt="Logo"
             className="w-24 h-24 rounded-full"
           />
         )}
@@ -72,13 +80,13 @@ function VisitorLogin({ onNext }: LoginProps) {
               className="rounded-lg"
             />
             <div className="flex justify-center mt-4 space-x-4">
-              <button 
+              <button
                 onClick={captureImage}
                 className="bg-green-500 text-white px-4 py-2 rounded-lg"
               >
                 Capture
               </button>
-              <button 
+              <button
                 onClick={() => setShowCamera(false)}
                 className="bg-red-500 text-white px-4 py-2 rounded-lg"
               >
@@ -88,7 +96,7 @@ function VisitorLogin({ onNext }: LoginProps) {
           </div>
         </div>
       )}
-      
+
       <div className="w-full max-w-md space-y-4">
         <div className="flex justify-center space-x-4 mb-6">
           <button
@@ -125,24 +133,26 @@ function VisitorLogin({ onNext }: LoginProps) {
           />
         </div>
 
-        <div className="border border-gray-200 rounded-lg p-4 flex justify-between items-center">
-          
-          <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
+        <div className="border border-gray-200 rounded-lg p-4 grid grid-cols-2 gap-2 justify-between items-center">
+          <div  className='flex items-center'>
+            <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
+            <input
+              type="text"
+              placeholder="Name"
+              value={visitorName}
+              onChange={(e) => setVisitorName(e.target.value)}
+              className="outline-none mr-2"
+            />
+          </div>
+          <div  className='flex items-center'>
           <input
-            type="name"
-            placeholder="Name"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            type="text"
+            placeholder="Lastname"
+            value={visitorLastName}
+            onChange={(e) => setvisitorLastName(e.target.value)}
             className="outline-none mr-2"
           />
-          <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
-          <input
-            type="name"
-            placeholder="LastName"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            className="outline-none"
-          />
+          </div>
         </div>
 
         <button
@@ -152,9 +162,9 @@ function VisitorLogin({ onNext }: LoginProps) {
           Register
         </button>
         <div className='flex items-center'>
-             OR
+          OR
         </div>
-        
+
         <div className="border border-gray-200 rounded-lg p-4 flex items-center">
           <FontAwesomeIcon icon={faKey} className="text-gray-400 mr-3" />
           <input

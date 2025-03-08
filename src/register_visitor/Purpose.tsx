@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faUserTie, faTruck, faUsers, faCrown, faStore, faTimes 
 } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 
 
 export interface VisitDetails {
@@ -9,17 +10,24 @@ export interface VisitDetails {
     phoneNumber: string;
     purpose: string;
   }
+  
 
   export interface PurposeType {
     id: number;
     title: string;
     icon: any; // FontAwesome icon type
   }  
+
 export interface PurposeProps {
+    details: VisitDetails ;
     onBack: () => void;
     onNext: (details: VisitDetails) => void;
   }
-function Purpose({ onBack, onNext }: PurposeProps) {
+
+function Purpose({ details, onBack, onNext }: PurposeProps) {
+  
+    const { visitorName, phoneNumber, purpose } = details;
+  
   const purposes: PurposeType[] = [
     { id: 1, title: 'Interview', icon: faUserTie },
     { id: 2, title: 'Delivery', icon: faTruck },
@@ -30,8 +38,8 @@ function Purpose({ onBack, onNext }: PurposeProps) {
 
   const handlePurposeSelect = (purpose: PurposeType) => {
     onNext({ 
-      visitorName: 'Raj',
-      phoneNumber: '7889XXXXXX',
+      visitorName: visitorName,
+      phoneNumber: phoneNumber,
       purpose: purpose.title
     });
   };
